@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2048 Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>2048 Game</h1>
+  <div id="score-board">
+    Score: <span id="score">0</span> |
+    High Score: <span id="high-score">{{ high_score }}</span>
+  </div>
+  <div id="game-container"></div>
+
+  <button onclick="location.reload()">Restart</button>
+
+  <p>Use Arrow Keys to Move</p>
+  <script>
+    const highScoreValue = parseInt("{{ high_score }}");
+  </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
