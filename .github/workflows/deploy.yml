@@ -37,6 +37,14 @@ jobs:
 
     - name: Deploy to EKS
       run: |
-        kubectl set image deployment/flask-deployment flask-container=${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+        # Update the image tag in your Deployment YAML
+        sed -i "s|<IMAGE_TAG>|${{ env.IMAGE_TAG }}|g" 2048-deployment.yml
+    
+        # Apply all resources
+        kubectl apply -f 2048-deployment.yml
+        kubectl apply -f flask-service.yaml
+        kubectl apply -f ingress.yaml
+    
+        # Wait for deployment to complete
         kubectl rollout status deployment/flask-deployment
-
+    
